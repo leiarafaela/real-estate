@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
  
+import useToken from "../../services/useToken";
+import { Header } from "../../components/Header/Header";
+
 function Profile(props) {
  
     const [profileData, setProfileData] = useState(null)
+
+    const {removeToken} = useToken();
      
     useEffect(() => {
         getUsers();
@@ -42,7 +47,11 @@ function Profile(props) {
  
  
   return (
+    <div>
+      <Header token={removeToken}/>
+    
       <div className="container">
+        
         <div className="row d-flex justify-content-center align-items-center h-50">
           <div className="col col-lg-12">
                 <div className="card mb-3">
@@ -81,6 +90,7 @@ function Profile(props) {
             </div>
           </div>
         </div>
+    </div>
     </div>
   );
 }

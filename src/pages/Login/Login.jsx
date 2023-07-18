@@ -3,13 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import './Login.css';
+import useToken from "../../services/useToken";
+import { Header } from '../../components/Header/Header';
 
-function Login(props){
+export const Login = (props) => {
 
     const [loginForm, setLoginForm] = useState({
         email: "",
         password: ""
     });
+
+    const {removeToken} = useToken();
 
     const navigate = useNavigate();
 
@@ -34,7 +38,7 @@ function Login(props){
                 props.setToken(response.data.access_token)
                 alert('Successfully login');
                 localStorage.setItem('email', loginForm.email)
-                navigate('/profile');
+                navigate('/home');
 
             } 
         ).catch(
@@ -46,33 +50,28 @@ function Login(props){
             }
         )
         event.preventDefault();
-
-        
-        
-
-    }
+    };
 
     return (
-        <div className='container'>
-            <form>
-                <p>Login</p>
-                <div>
-                 <input type='email' value={loginForm.email} text={loginForm.email} onChange={handleChange} name='email' id='email' placeholder='informe um email'></input>               
-                </div>
+        <div>
+            <Header token={removeToken}/>
+            <section className='container'>
+                <form>
+                    <p>Login</p>
+                    <div>
+                        <input type='email' value={loginForm.email} text={loginForm.email} onChange={handleChange} name='email' id='email' placeholder='informe um email'></input>               
+                    </div>
 
-                <div>          
-                <input type='password' value={loginForm.password} text={loginForm.password} onChange={handleChange} name='password' id='password' placeholder='informe sua senha'></input>
-                </div>
+                    <div>          
+                    <input type='password' value={loginForm.password} text={loginForm.password} onChange={handleChange} name='password' id='password' placeholder='informe sua senha'></input>
+                    </div>
 
-                <div>
-                    <button type="button" onClick={btnLogin}>Login</button>
-                </div>
+                    <div>
+                        <button type="button" onClick={btnLogin}>Login</button>
+                    </div>
 
-            </form>
-
-
+                </form>
+            </section>
         </div>
     )
-}
-
-export default Login;
+};

@@ -1,29 +1,24 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Login from './components/Login'
-import useToken from './components/useToken';
-import Profile from './components/Profile';
-import Header from './components/Header';
-
+import { Login } from './pages/Login/Login';
+import useToken from './services/useToken';
+import Home from './pages/Home/Home';
+import Profile from './pages/Profile/Profile';
 
 function App() {
 
-  const {token, removeToken, setToken} = useToken();
+  const {token, setToken} = useToken();
 
   return (
     <div>
       <BrowserRouter>
-      <Header token={removeToken}/>
-      {!token && token !== "" && token !== undefined?
-      <Login setToken={setToken} /> :(
-      <>
       <Routes>
-        <Route path='/profile' element={ <Profile token={token} setToken={setToken} /> } />
-      </Routes>
-      </>
-      )
-    }
+      <Route path='/' element={ <Home /> } />
+        <Route path='/login' element={ <Login setToken={setToken}/> } />
+        <Route path='/home' element={ <Home token={token} setToken={setToken} /> } />
+        <Route path='/profile' element={ <Profile token={token}/> } />
+      </Routes>    
       </BrowserRouter>
     </div>
   )

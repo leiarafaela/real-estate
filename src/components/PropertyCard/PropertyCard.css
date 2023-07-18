@@ -1,0 +1,33 @@
+.property-card {
+    width: 100%;
+    max-width: 450px;
+    height: 400px;
+    flex-direction: column;
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    margin-top: 50px;
+    cursor: pointer;
+} 
+
+.property__image{
+    width: 100%;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+ 
+}
+
+.property__infos{
+    padding: 10px;
+    
+}
+
+h2{
+    display: inline-block;
+}
+
+.property__localization{
+    margin-left: 5px;
+    font-size: 18px;
+}
+
